@@ -236,7 +236,7 @@ const recoverPassword = async (req, res) =>{
                             sendRecoveryEmail(email, password)
                             res.json({message: "0"})
                         }else{
-                            res.json({message: "1"})
+                            res.json({message: error})
                         }
                     }else{
                         console.log(error)
