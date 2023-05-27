@@ -19,7 +19,7 @@ app.set('port', (process.env.PORT));
 app.get(conn);
 
 //middlewares
-const allowedOrigins = ['http://localhost:4200', 'https://el-camello-frontend-p3yc.vercel.app'];
+const allowedOrigins = ['https://el-camello-frontend-p3yc.vercel.app'];
 
 const corsOptions = {
     origin: (origin, callback) => {

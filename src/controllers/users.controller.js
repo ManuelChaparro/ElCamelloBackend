@@ -231,7 +231,6 @@ const recoverPassword = async (req, res) =>{
                 let newPassword = crypto.createHash('sha256').update(password).digest('hex')
                 await connection.query(`update passwords set password = ${connection.escape(newPassword)} where indicador = ${connection.escape(email_binary)}`, async (error, result, fields) =>{
                     if(!error){
-                        console.log(result)
                         if(result.affectedRows === 1){
                             sendRecoveryEmail(email, password)
                             res.json({message: "0"})
