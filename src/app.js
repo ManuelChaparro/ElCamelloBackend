@@ -1,6 +1,5 @@
 'use strict'
 require('dotenv').config();
-
 const express = require('express');
 const cors = require('cors');
 const conn = require('../config/connections')
@@ -19,22 +18,15 @@ app.set('port', (process.env.PORT));
 app.get(conn);
 
 //middlewares
-const allowedOrigins = ['http://localhost:4200', 'https://el-camello-frontend-p3yc.vercel.app'];
-
-const corsOptions = {
-    origin: (origin, callback) => {
-        if (allowedOrigins.includes(origin)) {
-            callback(null, true);
-        } else {
-            callback(new Error('Not allowed by CORS'));
-        }
-    }
-};
-
-
 app.use(express.urlencoded({extended: false}));
 app.use(express.json());
-app.use(cors(corsOptions));
+app.use(cors());
+app.use((req, res, next) => {
+    res.setHeader('Access-Control-Allow-Origin', 'https://el-camello-frontend-p3yc.vercel.app');
+    res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE');
+    res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization');
+    next();
+});
 
 //routes
 app.use('/api', userRoutes);
